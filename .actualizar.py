@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import time
 import subprocess
 import signal
 import sys
@@ -41,7 +42,7 @@ def comprobacion():
 
 	if trys != 3:
 
-		if "Se pueden actualizar" in command.stdout:
+		if "Se pueden actualizar" in command.stdout or "Se puede actualizar" in command.stdout:
 
 			actualizacion()
 
