@@ -1,1 +1,3 @@
-Script personales por si en algun momento se me pierden de mi maquina virtual para tenerlos aqui bien guardados que para eso he perdido tiempo de mi vida en hacerlos
+# Proposito
+
+Este es un repositorio en el que comparto algunos scripts de Python que hago.
