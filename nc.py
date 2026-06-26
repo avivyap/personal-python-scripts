@@ -17,7 +17,7 @@ def description():
 
 def def_handler(sig,frame):
 
-	print(colored("\n[+] Saliendo...\n",'red'))
+	print(colored("\n[+] Exiting...\n",'red'))
 	sys.exit(1)
 
 
@@ -37,7 +37,7 @@ def listener(sock, port):
 		sock.bind(("0.0.0.0", port))
 		sock.listen(1)
 
-		print("Listening on 0.0.0.0 1212")
+		print(f"Listening on 0.0.0.0 {port}")
 
 		socket_client, ip_client = sock.accept()
 
@@ -66,9 +66,16 @@ def listener(sock, port):
 		socket_client.close()
 		sock.close()
 
+	except PermissionError:
+
+		print(colored("\n[!] To use this port, you must be root.\n",'red'))
+		return
+
+
 	except OSError:
 
-		print(colored("\n[!] El puerto esta en uso\n",'red'))
+		print(colored("\n[!] The port is in use.\n",'red'))
+		return
 
 def main():
 
