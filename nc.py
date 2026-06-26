@@ -3,7 +3,7 @@
 import signal
 import sys
 import socket
-import socket
+import select,sys
 import argparse
 from termcolor import colored
 
@@ -41,28 +41,30 @@ def listener(sock, port):
 
 		socket_client, ip_client = sock.accept()
 
+		info_client = f"{ip_client}"
+
+		print("Connection received on " + info_client)
+
 		while True:
 
-			try:
-				data = socket_client.recv(1024)
+			r, _, _ = select.select([socket_client, sys.stdin], [], [])
 
-				if not data:
+			for i in r:
 
-					break
+				if i == socket_client:
+					data = socket_client.recv(1024)
 
-				print(data.decode(errors="ignore"), end="")
+					if not data:
+						return
 
-				cmd = input() + "\n"
-				socket_client.send(cmd.encode())
+					print(data.decode(errors="ignore"), end="")
 
-
-			except KeyboardInterrupt:
-
-				break
+				else:
+					msg = sys.stdin.readline()
+					socket_client.send(msg.encode())
 
 		socket_client.close()
 		sock.close()
-
 
 	except OSError:
 
