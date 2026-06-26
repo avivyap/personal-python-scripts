@@ -1,3 +1,3 @@
-# Proposito
+# Purpose
 
-Este es un repositorio en el que comparto algunos scripts de Python que hago.
+This is a repository where I share some Python scripts I create.
